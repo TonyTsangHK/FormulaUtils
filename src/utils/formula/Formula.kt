@@ -158,19 +158,23 @@ class Formula {
         return chainerStack.firstElement().computeResult()
     }
 
-    fun compute(): BigDecimal? {
+    // Compute should not return null
+    // if anything goes wrong, consider to throw arithmetic exception instead
+    fun compute(): BigDecimal {
         return compute(null)
     }
 
-    fun compute(variableValues: Map<String, BigDecimal>?): BigDecimal? {
+    // Compute should not return null
+    // if anything goes wrong, consider to throw arithmetic exception instead
+    fun compute(variableValues: Map<String, BigDecimal>?): BigDecimal {
         if (result != null) {
-            return result
+            return result!!
         } else if (!chainerStack.isEmpty()) {
             result = chainerStack.firstElement().computeResult()
-            return result
+            return result!!
         } else {
             result = computeResult(variableValues)
-            return result
+            return result!!
         }
     }
 
