@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+buildscript {
+    ext.kotlin_version = "1.0.3"
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+sourceCompatibility = 1.8
+
+version = '1.0.0'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    testCompile group: 'org.testng', name: 'testng', version: '6.8.17'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        kotlin {
+            srcDir 'src'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'test'
+        }
+        kotlin {
+            srcDir 'test'
+        }
+    }
+}
+
+test {
+    useTestNG() {
+        suites 'test/AllTest.xml'
+    }
+
+    testLogging.showStandardStreams = true
+}
