@@ -4,129 +4,123 @@ import java.math.BigDecimal
 
 import org.testng.Assert
 import org.testng.annotations.Test
-import utils.formula.Formula
 import utils.formula.parser.SimpleFormulaParser
 
 class TestSimpleFormulaParser {
-    private val simpleFormulaParser = SimpleFormulaParser
-    private val defaultDelta = 0.0000001
     @Test
     fun testSimpleExpression() {
-        Assert.assertEquals(
-            BigDecimal("3").compareTo(
-                    simpleFormulaParser.parseFormula("1+1+1").compute()!!
-            ), 0
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("1+1+1").compute(), BigDecimal("3")
         )
 
-        Assert.assertEquals(
-                BigDecimal("6").compareTo(
-                        simpleFormulaParser.parseFormula("1+2+3").compute()!!
-                ), 0
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("1+2+3").compute(), BigDecimal("6")
         )
 
-        Assert.assertEquals(
-            simpleFormulaParser.parseFormula("99-6+3-88.6+11.53").compute()!!.toDouble(),
-            18.93, defaultDelta
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("99-6+3-88.6+11.53").compute(), BigDecimal("18.93")
         )
     }
 
     @Test
     fun testSimplePostfixExpression() {
-        Assert.assertEquals(
-            simpleFormulaParser.parseFormula("50%").compute()!!.toDouble(),
-            0.5, defaultDelta
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("50%").compute(), BigDecimal("0.5")
         )
-        Assert.assertEquals(
-            simpleFormulaParser.parseFormula("10%").compute()!!.toDouble(),
-            0.1, defaultDelta
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("10%").compute(), BigDecimal("0.1")
         )
-        Assert.assertEquals(
-            simpleFormulaParser.parseFormula("125%").compute()!!.toDouble(),
-            1.25, defaultDelta
+        assertBigDecimalEquals(
+            SimpleFormulaParser.parseFormula("125%").compute(), BigDecimal("1.25")
         )
 
-        Assert.assertEquals(simpleFormulaParser.parseFormula("5!").compute()!!.toInt(), 120)
-        Assert.assertEquals(simpleFormulaParser.parseFormula("3!").compute()!!.toInt(), 6)
-        Assert.assertEquals(simpleFormulaParser.parseFormula("2!").compute()!!.toInt(), 2)
-        Assert.assertEquals(simpleFormulaParser.parseFormula("1!").compute()!!.toInt(), 1)
-        Assert.assertEquals(simpleFormulaParser.parseFormula("0!").compute()!!.toInt(), 0)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("5!").compute().toInt(), 120)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("3!").compute().toInt(), 6)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("2!").compute().toInt(), 2)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("1!").compute().toInt(), 1)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("0!").compute().toInt(), 0)
     }
 
     @Test
     fun testPrecedence() {
-        Assert.assertFalse(
-            BigDecimal("9").compareTo(
-                    simpleFormulaParser.parseFormula("1+2*3").compute()!!
-            ) == 0
+        Assert.assertNotEquals(
+            SimpleFormulaParser.parseFormula("1+2*3").compute().toInt(), 9
         )
 
-        Assert.assertEquals(simpleFormulaParser.parseFormula("1+2*3").compute()!!.intValueExact(), 7)
+        Assert.assertEquals(SimpleFormulaParser.parseFormula("1+2*3").compute().toInt(), 7)
 
-        Assert.assertFalse(
-            BigDecimal("81").compareTo(
-                    simpleFormulaParser.parseFormula("(1+2*3^2)").compute()!!
-            ) == 0
+        Assert.assertNotEquals(
+            SimpleFormulaParser.parseFormula("(1+2*3^2)").compute().toInt(), 81
         )
 
         Assert.assertEquals(
-            simpleFormulaParser.parseFormula("(1+2*3^2)").compute()!!.intValueExact(), 19
+            SimpleFormulaParser.parseFormula("(1+2*3^2)").compute().toInt(), 19
         )
 
         Assert.assertEquals(
-            simpleFormulaParser.parseFormula("1+2*3^2").compute()!!.intValueExact(), 19
+            SimpleFormulaParser.parseFormula("1+2*3^2").compute().toInt(), 19
         )
 
         Assert.assertEquals(
-            simpleFormulaParser.parseFormula("5+4*2^300%!").compute()!!.intValueExact(), 261
+            SimpleFormulaParser.parseFormula("5+4*2^300%!").compute().toInt(), 261
         )
     }
 
     @Test
     fun testBracket() {
         Assert.assertEquals(
-            simpleFormulaParser.parseFormula("1+2*(3+1)").compute()!!.intValueExact(), 9
+            SimpleFormulaParser.parseFormula("1+2*(3+1)").compute().toInt(), 9
         )
 
         val formulaExpression = "2^(3+2*(((2-1*(2-1^2^(2-2^4^0.5)))*3)+6*2-7*2))"
 
-        val formula = simpleFormulaParser.parseFormula(formulaExpression)
+        val formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), 32.0, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("32.0"))
     }
 
     @Test
     fun testMixedFormula() {
         var formulaExpression = "2^(3+2*(((2-1*(2-1^2^(2-2^4^50%)))*3)+3!*200%-7*2!))"
 
-        var formula = simpleFormulaParser.parseFormula(formulaExpression)
+        var formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), 32.0, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("32.0"))
 
         formulaExpression = "2^(3+2*(((2-1*(2-1^2^(2-2^(2*100+1*100+2!*100-1*100)%^50%)))*3)+3!*200%-7*2!))"
 
-        formula = simpleFormulaParser.parseFormula(formulaExpression)
+        formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), 32.0, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("32.0"))
 
         formulaExpression = "2! + 3 - 5! * 2! ^ 200% + 3 ^ 2 - 9 * 50%"
 
-        formula = simpleFormulaParser.parseFormula(formulaExpression)
+        formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), -470.5, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("-470.5"))
 
         formulaExpression = "√16+2!-5!*2!^200%+√(400%)-√√(9^4)*50%"
 
-        formula = simpleFormulaParser.parseFormula(formulaExpression)
+        formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), -476.5, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("-476.5"))
     }
 
     @Test
     fun testSimplePrefixExpression() {
         val formulaExpression = "√√16"
 
-        val formula = simpleFormulaParser.parseFormula(formulaExpression)
+        val formula = SimpleFormulaParser.parseFormula(formulaExpression)
 
-        Assert.assertEquals(formula.compute()!!.toDouble(), 2.0, defaultDelta)
+        assertBigDecimalEquals(formula.compute(), BigDecimal("2.0"))
+    }
+
+    // Since BigDecimal's equals also compare scale which not ideal for general value comparison
+    // This method will use compareTo method for equality checking.
+    fun assertBigDecimalEquals(a: BigDecimal, b: BigDecimal) {
+        if (a.compareTo(b) != 0) {
+            // Recreate the error message with the same format as Assert.assertEquals
+            throw AssertionError("expected [$b] but found [$a]")
+        }
     }
 }
