@@ -4,11 +4,7 @@ import java.math.BigDecimal
 
 import org.testng.Assert
 import org.testng.annotations.Test
-import utils.formula.operator.computation.DivisionOperator
-import utils.formula.operator.computation.MinusOperator
-import utils.formula.operator.computation.MultiplyOperator
-import utils.formula.operator.computation.PlusOperator
-import utils.formula.operator.computation.PowerOperator
+import utils.formula.operator.computation.*
 import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.postfix.PermutationOperator
 
@@ -36,6 +32,15 @@ class TestOperatorComputation {
         )
 
         Assert.assertEquals(operator.compute(BigDecimal(10)).toInt(), -10)
+    }
+
+    @Test
+    fun testModulo() {
+        val operator = ModuloOperator
+
+        Assert.assertEquals(
+            operator.compute(BigDecimal("7"), BigDecimal("5")).toInt(), 2
+        )
     }
 
     @Test
