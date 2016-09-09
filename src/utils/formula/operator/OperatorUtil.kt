@@ -5,13 +5,14 @@ import utils.formula.operator.general.LeftBracket
 import utils.formula.operator.general.RightBracket
 import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.postfix.PermutationOperator
+import utils.formula.operator.prefix.NegateOperator
 import utils.formula.operator.prefix.RootOperator
 
 object OperatorUtil {
-    private val POSTFIX_OPERATORS = arrayOf(PermutationOperator, PercentageOperator)
-    private val PREFIX_OPERATORS = arrayOf(RootOperator)
-    private val COMPUTATION_OPERATORS = arrayOf(PlusOperator, MinusOperator, MultiplyOperator, DivisionOperator, ModuloOperator, PowerOperator)
-    private val GENERAL_OPERATORS = arrayOf(LeftBracket, RightBracket)
+    private val POSTFIX_OPERATORS: Array<PostfixOperator> = arrayOf(PermutationOperator, PercentageOperator)
+    private val PREFIX_OPERATORS: Array<PrefixOperator> = arrayOf(RootOperator, NegateOperator)
+    private val COMPUTATION_OPERATORS: Array<ComputationOperator> = arrayOf(PlusOperator, MinusOperator, MultiplyOperator, DivisionOperator, ModuloOperator, PowerOperator)
+    private val GENERAL_OPERATORS: Array<Operator> = arrayOf(LeftBracket, RightBracket)
 
     fun createOperator(expression: String?): Operator {
         if (expression == null) {

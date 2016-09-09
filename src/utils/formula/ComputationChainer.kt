@@ -71,7 +71,7 @@ class ComputationChainer : ComputationUnit {
         var lastUnit = computationUnitStack.pop()
         val compoundUnit = convertToCompoundUnit(lastUnit)
         if (compoundUnit.isEmpty) {
-            if (operator is PlusOperator || operator is MinusOperator) {
+            if (operator is PlusOperator) {
                 prefixOperatorStack.push(operator as PrefixOperator)
                 computationUnitStack.push(lastUnit)
                 return

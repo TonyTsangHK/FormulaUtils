@@ -7,17 +7,13 @@ import utils.formula.operator.ComputationOperator
 import utils.formula.operator.Operator
 import utils.formula.operator.PrefixOperator
 
-object MinusOperator: ComputationOperator, PrefixOperator {
+object MinusOperator: ComputationOperator {
     override val componentType: FormulaComponent.Type
         get() = FormulaComponent.Type.OPERATOR
     override val formulaComponentExpression: String
         get() = EXPRESSION
 
     val EXPRESSION = "-"
-
-    override fun compute(operand: BigDecimal): BigDecimal {
-        return operand.negate()
-    }
 
     override fun compute(leftOperand: BigDecimal, rightOperand: BigDecimal): BigDecimal {
         return leftOperand - rightOperand

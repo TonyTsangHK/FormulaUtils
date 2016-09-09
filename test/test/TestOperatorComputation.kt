@@ -7,6 +7,7 @@ import org.testng.annotations.Test
 import utils.formula.operator.computation.*
 import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.postfix.PermutationOperator
+import utils.formula.operator.prefix.NegateOperator
 
 class TestOperatorComputation {
     private val defaultDelta = 0.0000001
@@ -23,15 +24,13 @@ class TestOperatorComputation {
     }
 
     @Test
-    fun testSubtract() {
-        val operator = MinusOperator
-
+    fun testSubtractAndNegate() {
         Assert.assertEquals(
-            operator.compute(BigDecimal("100.6"), BigDecimal("11.9")).toDouble(),
+            MinusOperator.compute(BigDecimal("100.6"), BigDecimal("11.9")).toDouble(),
             88.7, defaultDelta
         )
 
-        Assert.assertEquals(operator.compute(BigDecimal(10)).toInt(), -10)
+        Assert.assertEquals(NegateOperator.compute(BigDecimal(10)).toInt(), -10)
     }
 
     @Test

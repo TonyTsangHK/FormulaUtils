@@ -195,6 +195,14 @@ class Formula {
         }
     }
 
+    fun lastFormulaComponent(): FormulaComponent? {
+        if (components.size > 0) {
+            return components[components.size-1]
+        } else {
+            return null
+        }
+    }
+
     fun getFormulaComponent(i: Int): FormulaComponent? {
         if (i >= 0 && i < components.size) {
             return components[i]

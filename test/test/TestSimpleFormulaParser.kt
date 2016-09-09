@@ -47,6 +47,13 @@ class TestSimpleFormulaParser {
     }
 
     @Test
+    fun testMinusAndNegate() {
+        evaluateFormulaAndVerifyResult("-2", "-2")
+        evaluateFormulaAndVerifyResult("1--2", "3")
+        evaluateFormulaAndVerifyResult("1-2", "-1")
+    }
+
+    @Test
     fun testBracket() {
         evaluateFormulaAndVerifyResult("1+2*(3+1)", BigDecimal("9"))
         evaluateFormulaAndVerifyResult("2^(3+2*(((2-1*(2-1^2^(2-2^4^0.5)))*3)+6*2-7*2))", BigDecimal("32.0"))
