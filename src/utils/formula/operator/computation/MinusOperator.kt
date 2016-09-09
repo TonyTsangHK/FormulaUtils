@@ -23,14 +23,6 @@ object MinusOperator: ComputationOperator, PrefixOperator {
         return leftOperand - rightOperand
     }
 
-    override fun isOperatorExpression(expression: String): Boolean {
-        return expression == EXPRESSION
-    }
-
-    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
-        return expression.startsWith(EXPRESSION, startIndex)
-    }
-
     override fun toString(): String {
         return EXPRESSION
     }

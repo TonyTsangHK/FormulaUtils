@@ -11,19 +11,10 @@ object PercentageOperator: PostfixOperator {
         get() = FormulaComponent.Type.OPERATOR
     override val formulaComponentExpression: String
         get() = EXPRESSION
-
-    val EXPRESSION = "%"
-
-    override fun isOperatorExpression(expression: String): Boolean {
-        return expression == EXPRESSION
-    }
-
-    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
-        return expression.startsWith(EXPRESSION, startIndex)
-    }
-
     override val precedence: Operator.Precedence
         get() = Operator.Precedence.COMMON
+
+    val EXPRESSION = "%"
 
     override fun compute(operand: BigDecimal): BigDecimal {
         return operand.divide(BigDecimal(100), Operator.DEFAULT_MATH_CONTEXT)

@@ -32,7 +32,9 @@ interface Operator: FormulaComponent {
      * *
      * @return check result
      */
-    fun isOperatorExpression(expression: String): Boolean
+    fun isOperatorExpression(expression: String): Boolean {
+        return expression == formulaComponentExpression
+    }
 
     /**
      * Check whether the provided expression is start with an operation
@@ -42,7 +44,9 @@ interface Operator: FormulaComponent {
      *
      * @return check result
      */
-    fun isStartWithOperatorExpression(expression: String, startIndex: Int = 0): Boolean
+    fun isStartWithOperatorExpression(expression: String, startIndex: Int = 0): Boolean {
+        return expression.startsWith(formulaComponentExpression, startIndex);
+    }
 
     /**
      * Get operator precedency

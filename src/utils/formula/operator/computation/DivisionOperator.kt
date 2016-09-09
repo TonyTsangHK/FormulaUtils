@@ -11,6 +11,8 @@ object DivisionOperator: ComputationOperator {
         get() = FormulaComponent.Type.OPERATOR
     override val formulaComponentExpression: String
         get() = EXPRESSION_NORMAL
+    override val precedence: Operator.Precedence
+        get() = Operator.Precedence.MIDDLE
 
     val EXPRESSION_NORMAL = "÷"
     val EXPRESSION_COMP = "/"
@@ -30,7 +32,4 @@ object DivisionOperator: ComputationOperator {
     override fun toString(): String {
         return EXPRESSION_NORMAL
     }
-
-    override val precedence: Operator.Precedence
-        get() = Operator.Precedence.MIDDLE
 }

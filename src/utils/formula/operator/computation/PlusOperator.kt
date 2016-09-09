@@ -12,6 +12,8 @@ object PlusOperator: ComputationOperator, PrefixOperator {
         get() = FormulaComponent.Type.OPERATOR
     override val formulaComponentExpression: String
         get() = EXPRESSION
+    override val precedence: Operator.Precedence
+        get() = Operator.Precedence.LOWEST
 
     val EXPRESSION = "+"
 
@@ -23,18 +25,7 @@ object PlusOperator: ComputationOperator, PrefixOperator {
         return leftOperand + rightOperand
     }
 
-    override fun isOperatorExpression(expression: String): Boolean {
-        return expression == EXPRESSION
-    }
-
-    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
-        return expression.startsWith(EXPRESSION, startIndex)
-    }
-
     override fun toString(): String {
         return EXPRESSION
     }
-
-    override val precedence: Operator.Precedence
-        get() = Operator.Precedence.LOWEST
 }

@@ -8,21 +8,12 @@ object RightBracket: Operator {
         get() = FormulaComponent.Type.OPERATOR
     override val formulaComponentExpression: String
         get() = EXPRESSION
+    override val precedence: Operator.Precedence
+        get() = Operator.Precedence.GENERAL
 
     val EXPRESSION = ")"
-
-    override fun isOperatorExpression(expression: String): Boolean {
-        return expression == EXPRESSION
-    }
-
-    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
-        return expression.startsWith(EXPRESSION, startIndex)
-    }
 
     override fun toString(): String {
         return EXPRESSION
     }
-
-    override val precedence: Operator.Precedence
-        get() = Operator.Precedence.GENERAL
 }

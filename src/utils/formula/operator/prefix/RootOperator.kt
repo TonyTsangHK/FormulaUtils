@@ -28,14 +28,6 @@ object RootOperator: PrefixOperator {
         }
     }
 
-    override fun isOperatorExpression(expression: String): Boolean {
-        return EXPRESSION == expression
-    }
-
-    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
-        return expression.startsWith(EXPRESSION, startIndex)
-    }
-
     override fun toString(): String {
         return EXPRESSION
     }
