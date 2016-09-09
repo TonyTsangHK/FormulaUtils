@@ -27,6 +27,10 @@ object MinusOperator: ComputationOperator, PrefixOperator {
         return expression == EXPRESSION
     }
 
+    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
+        return expression.startsWith(EXPRESSION, startIndex)
+    }
+
     override fun toString(): String {
         return EXPRESSION
     }

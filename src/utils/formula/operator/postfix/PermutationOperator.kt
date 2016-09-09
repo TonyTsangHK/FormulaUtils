@@ -21,6 +21,10 @@ object PermutationOperator: PostfixOperator {
         return expression == EXPRESSION
     }
 
+    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
+        return expression.startsWith(EXPRESSION,  startIndex)
+    }
+
     override fun compute(operand: BigDecimal): BigDecimal {
         val remain = (operand % BigDecimal("1")).toDouble()
         if (remain > 0 || operand.compareTo(BigDecimal(0)) < 0) {

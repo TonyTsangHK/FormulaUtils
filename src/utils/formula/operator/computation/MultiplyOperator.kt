@@ -23,6 +23,10 @@ object MultiplyOperator: ComputationOperator {
         return expression == EXPRESSION_NORMAL
     }
 
+    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
+        return expression.startsWith(EXPRESSION_NORMAL, startIndex) || expression.startsWith(EXPRESSION_COMP, startIndex)
+    }
+
     override fun toString(): String {
         return EXPRESSION_NORMAL
     }

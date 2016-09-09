@@ -35,6 +35,16 @@ interface Operator: FormulaComponent {
     fun isOperatorExpression(expression: String): Boolean
 
     /**
+     * Check whether the provided expression is start with an operation
+     *
+     * @param expression target expression
+     * @param startIndex start index of the expression, default 0
+     *
+     * @return check result
+     */
+    fun isStartWithOperatorExpression(expression: String, startIndex: Int = 0): Boolean
+
+    /**
      * Get operator precedency
 
      * @return precedency

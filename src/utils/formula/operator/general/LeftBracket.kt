@@ -19,6 +19,10 @@ object LeftBracket: Operator {
         return EXPRESSION
     }
 
+    override fun isStartWithOperatorExpression(expression: String, startIndex: Int): Boolean {
+        return expression.startsWith(EXPRESSION, startIndex)
+    }
+
     override val precedence: Operator.Precedence
         get() = Operator.Precedence.GENERAL
 }
