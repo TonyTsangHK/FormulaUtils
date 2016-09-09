@@ -11,7 +11,6 @@ import utils.formula.operator.ComputationOperator
 import utils.formula.operator.Operator
 import utils.formula.operator.PostfixOperator
 import utils.formula.operator.PrefixOperator
-import utils.formula.operator.computation.MinusOperator
 import utils.formula.operator.computation.PlusOperator
 
 class ComputationChainer : ComputationUnit {
@@ -174,16 +173,16 @@ class ComputationChainer : ComputationUnit {
             if (unit.computationOperator != null) {
                 return unit.computationOperator!!.precedence
             } else {
-                throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedeny error")
+                throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedence error")
             }
         } else if (unit is ComputationSingleUnit) {
             if (unit.operator != null) {
                 return unit.operator!!.precedence
             } else {
-                throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedeny error")
+                throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedence error")
             }
         } else {
-            throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedeny error")
+            throw FormulaProcessingException("utils.formula.Formula syntax error: Operator precedence error")
         }
     }
 
