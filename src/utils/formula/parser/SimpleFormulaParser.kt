@@ -12,13 +12,16 @@ object SimpleFormulaParser: FormulaParser {
         val formula = Formula()
         val formulaExpression = expression.replace("\\s*".toRegex(), "")
         var bufferedChars = StringBuilder()
-        for (i in 0..formulaExpression.length - 1) {
+
+        var i = 0
+        while (i < formulaExpression.length) {
             val generalOperator = OperatorUtil.extractGeneralOperator(formulaExpression, i)
             var prefixOperator: PrefixOperator? = null
             var postfixOperator: PostfixOperator? = null
             var computationOperator: ComputationOperator? = null
 
             val chr = formulaExpression[i]
+            var advance = 0
 
             if (bufferedChars.length == 0) {
                 prefixOperator = OperatorUtil.extractPrefixOperator(formulaExpression, i)
@@ -31,8 +34,10 @@ object SimpleFormulaParser: FormulaParser {
                 }
             }
 
-            if (generalOperator != null || computationOperator != null ||
-                    postfixOperator != null || prefixOperator != null) {
+            if (
+                generalOperator != null || computationOperator != null ||
+                postfixOperator != null || prefixOperator != null
+            ) {
                 if (bufferedChars.length > 0) {
                     formula.addFormulaComponent(ComputationNumber(bufferedChars.toString()))
                     bufferedChars = StringBuilder()
@@ -40,16 +45,23 @@ object SimpleFormulaParser: FormulaParser {
 
                 if (generalOperator != null) {
                     formula.addFormulaComponent(generalOperator)
+                    advance = generalOperator.formulaComponentExpression.length
                 } else if (computationOperator != null) {
                     formula.addFormulaComponent(computationOperator)
+                    advance = computationOperator.formulaComponentExpression.length
                 } else if (postfixOperator != null) {
                     formula.addFormulaComponent(postfixOperator)
+                    advance = postfixOperator.formulaComponentExpression.length
                 } else if (prefixOperator != null) {
                     formula.addFormulaComponent(prefixOperator)
+                    advance = prefixOperator.formulaComponentExpression.length
                 }
             } else {
                 bufferedChars.append(chr)
+                advance = 1
             }
+
+            i += advance
         }
 
         if (bufferedChars.length > 0) {
