@@ -16,6 +16,6 @@ Supported operators:
 - Square root: √
 - Percentage: %
 - Brackets: ( and )
-- Permutation: !
+- Factorial: !
 
 Though this repository is named formulaUtils, no variable parsing was implemented.

@@ -4,6 +4,7 @@ import java.math.BigDecimal
 
 import org.testng.Assert
 import org.testng.annotations.Test
+import utils.formula.exception.NonExtendableException
 import utils.formula.parser.SimpleFormulaParser
 
 class TestSimpleFormulaParser {
@@ -23,7 +24,36 @@ class TestSimpleFormulaParser {
         evaluateFormulaAndVerifyResult("3!", "6")
         evaluateFormulaAndVerifyResult("2!", "2")
         evaluateFormulaAndVerifyResult("1!", "1")
-        evaluateFormulaAndVerifyResult("0!", "0")
+        evaluateFormulaAndVerifyResult("0!", "1")
+    }
+
+    @Test
+    fun testFactorial() {
+        evaluateFormulaAndVerifyResult("0!", "1")
+        evaluateFormulaAndVerifyResult("1!", "1")
+        evaluateFormulaAndVerifyResult("2!", "2")
+        evaluateFormulaAndVerifyResult("3!", "6")
+        evaluateFormulaAndVerifyResult("4!", "24")
+
+        var thrownException: Exception? = null
+
+        try {
+            SimpleFormulaParser.parseFormula("-2!").compute()
+        } catch (e: Exception) {
+            thrownException = e
+        }
+
+        Assert.assertTrue(thrownException != null && thrownException is NonExtendableException)
+
+        thrownException = null
+
+        try {
+            SimpleFormulaParser.parseFormula("2.22!").compute()
+        } catch (e: Exception) {
+            thrownException = e
+        }
+
+        Assert.assertTrue(thrownException != null && thrownException is NonExtendableException)
     }
 
     @Test

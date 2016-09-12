@@ -6,7 +6,7 @@ import org.testng.Assert
 import org.testng.annotations.Test
 import utils.formula.operator.computation.*
 import utils.formula.operator.postfix.PercentageOperator
-import utils.formula.operator.postfix.PermutationOperator
+import utils.formula.operator.postfix.FactorialOperator
 import utils.formula.operator.prefix.NegateOperator
 
 class TestOperatorComputation {
@@ -100,10 +100,10 @@ class TestOperatorComputation {
     }
 
     @Test
-    fun testPermutation() {
-        val operator = PermutationOperator
+    fun testFactorial() {
+        val operator = FactorialOperator
 
-        Assert.assertEquals(operator.compute(BigDecimal(0)).toInt(), 0)
+        Assert.assertEquals(operator.compute(BigDecimal(0)).toInt(), 1)
         Assert.assertEquals(operator.compute(BigDecimal(1)).toInt(), 1)
         Assert.assertEquals(operator.compute(BigDecimal(2)).toInt(), 2)
         Assert.assertEquals(operator.compute(BigDecimal(3)).toInt(), 6)
