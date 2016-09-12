@@ -51,6 +51,8 @@ class TestSimpleFormulaParser {
         evaluateFormulaAndVerifyResult("-2", "-2")
         evaluateFormulaAndVerifyResult("1--2", "3")
         evaluateFormulaAndVerifyResult("1-2", "-1")
+        evaluateFormulaAndVerifyResult("-3^2", "9")
+        evaluateFormulaAndVerifyResult("-(3^2)", "-9")
     }
 
     @Test
