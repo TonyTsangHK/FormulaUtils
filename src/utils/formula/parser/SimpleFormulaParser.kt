@@ -9,6 +9,11 @@ import utils.formula.operator.PrefixOperator
 import utils.formula.operator.general.RightBracket
 
 object SimpleFormulaParser: FormulaParser {
+    @JvmStatic
+    fun getInstance(): SimpleFormulaParser {
+        return SimpleFormulaParser
+    }
+    
     override fun parseFormula(expression: String): Formula {
         val formula = Formula()
         val formulaExpression = expression.replace("\\s*".toRegex(), "")
