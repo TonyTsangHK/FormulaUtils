@@ -1,10 +1,9 @@
 package utils.formula.operator
 
+import utils.formula.component.FormulaComponent
 import java.math.MathContext
 import java.math.RoundingMode
 import java.util.Comparator
-
-import utils.formula.component.FormulaComponent
 
 /**
  * utils.formula.Formula operator interface

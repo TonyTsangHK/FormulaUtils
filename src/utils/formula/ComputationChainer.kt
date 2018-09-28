@@ -1,8 +1,5 @@
 package utils.formula
 
-import java.math.BigDecimal
-import java.util.Stack
-
 import utils.formula.component.ComputationCompoundUnit
 import utils.formula.component.ComputationSingleUnit
 import utils.formula.component.ComputationUnit
@@ -12,6 +9,8 @@ import utils.formula.operator.Operator
 import utils.formula.operator.PostfixOperator
 import utils.formula.operator.PrefixOperator
 import utils.formula.operator.computation.PlusOperator
+import java.math.BigDecimal
+import java.util.Stack
 
 class ComputationChainer : ComputationUnit {
     private lateinit var computationUnitStack: Stack<ComputationUnit>

@@ -1,10 +1,9 @@
 package utils.formula.operator.postfix
 
-import java.math.BigDecimal
-
 import utils.formula.component.FormulaComponent
 import utils.formula.operator.Operator
 import utils.formula.operator.PostfixOperator
+import java.math.BigDecimal
 
 object PercentageOperator: PostfixOperator {
     override val componentType: FormulaComponent.Type

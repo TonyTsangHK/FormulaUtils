@@ -1,12 +1,11 @@
 package utils.formula.operator.prefix
 
-import java.math.BigDecimal
-
 import utils.formula.component.FormulaComponent
 import utils.formula.exception.NegativeRootException
 import utils.formula.operator.Operator
 import utils.formula.operator.PrefixOperator
 import utils.formula.operator.computation.PowerOperator
+import java.math.BigDecimal
 
 object RootOperator: PrefixOperator {
     override val componentType: FormulaComponent.Type

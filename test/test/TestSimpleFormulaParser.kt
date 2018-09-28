@@ -1,11 +1,10 @@
 package test
 
-import java.math.BigDecimal
-
 import org.testng.Assert
 import org.testng.annotations.Test
 import utils.formula.exception.NonExtendableException
 import utils.formula.parser.SimpleFormulaParser
+import java.math.BigDecimal
 
 class TestSimpleFormulaParser {
     @Test

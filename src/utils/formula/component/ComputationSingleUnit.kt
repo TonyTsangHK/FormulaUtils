@@ -1,9 +1,8 @@
 package utils.formula.component
 
-import java.math.BigDecimal
-
 import utils.formula.exception.IncompleteComputationCompoundUnitException
 import utils.formula.operator.SingleComputationOperator
+import java.math.BigDecimal
 
 class ComputationSingleUnit : ComputationUnit {
     var computationUnit: ComputationUnit?

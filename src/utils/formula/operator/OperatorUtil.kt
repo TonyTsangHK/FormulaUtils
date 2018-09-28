@@ -3,8 +3,8 @@ package utils.formula.operator
 import utils.formula.operator.computation.*
 import utils.formula.operator.general.LeftBracket
 import utils.formula.operator.general.RightBracket
-import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.postfix.FactorialOperator
+import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.prefix.NegateOperator
 import utils.formula.operator.prefix.RootOperator
 

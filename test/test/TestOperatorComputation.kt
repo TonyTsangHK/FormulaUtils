@@ -1,13 +1,12 @@
 package test
 
-import java.math.BigDecimal
-
 import org.testng.Assert
 import org.testng.annotations.Test
 import utils.formula.operator.computation.*
-import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.postfix.FactorialOperator
+import utils.formula.operator.postfix.PercentageOperator
 import utils.formula.operator.prefix.NegateOperator
+import java.math.BigDecimal
 
 class TestOperatorComputation {
     private val defaultDelta = 0.0000001

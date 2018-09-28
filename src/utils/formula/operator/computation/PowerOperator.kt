@@ -1,10 +1,9 @@
 package utils.formula.operator.computation
 
-import java.math.BigDecimal
-
 import utils.formula.component.FormulaComponent
 import utils.formula.operator.ComputationOperator
 import utils.formula.operator.Operator
+import java.math.BigDecimal
 
 object PowerOperator: ComputationOperator {
     override val componentType: FormulaComponent.Type
